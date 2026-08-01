@@ -291,6 +291,7 @@ class ArtifactoryClient implements AutoCloseable {
         private final UsernamePasswordCredentials credentials;
         private final int maxUploadRetries;
         private final int retryDelaySeconds;
+        private final boolean verboseLogging;
 
         public ArtifactoryConfig(String serverUrl, String repository, UsernamePasswordCredentials credentials) {
             this(
@@ -298,7 +299,8 @@ class ArtifactoryClient implements AutoCloseable {
                     repository,
                     credentials,
                     ArtifactoryGenericArtifactConfig.DEFAULT_MAX_UPLOAD_RETRIES,
-                    ArtifactoryGenericArtifactConfig.DEFAULT_RETRY_DELAY_SECONDS);
+                    ArtifactoryGenericArtifactConfig.DEFAULT_RETRY_DELAY_SECONDS,
+                    false);
         }
 
         public ArtifactoryConfig(
@@ -306,12 +308,14 @@ class ArtifactoryClient implements AutoCloseable {
                 String repository,
                 UsernamePasswordCredentials credentials,
                 int maxUploadRetries,
-                int retryDelaySeconds) {
+                int retryDelaySeconds,
+                boolean verboseLogging) {
             this.serverUrl = serverUrl;
             this.repository = repository;
             this.credentials = CredentialsProvider.snapshot(UsernamePasswordCredentials.class, credentials);
             this.maxUploadRetries = maxUploadRetries;
             this.retryDelaySeconds = retryDelaySeconds;
+            this.verboseLogging = verboseLogging;
         }
 
         public String getServerUrl() {
@@ -332,6 +336,10 @@ class ArtifactoryClient implements AutoCloseable {
 
         public int getRetryDelaySeconds() {
             return retryDelaySeconds;
+        }
+
+        public boolean isVerboseLogging() {
+            return verboseLogging;
         }
     }
 }

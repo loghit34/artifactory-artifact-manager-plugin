@@ -49,6 +49,7 @@ public class ArtifactoryGenericArtifactConfig extends AbstractDescribableImpl<Ar
     private int maxUploadRetries = DEFAULT_MAX_UPLOAD_RETRIES;
     private int retryDelaySeconds = DEFAULT_RETRY_DELAY_SECONDS;
     private boolean disableDirectDownload = false;
+    private boolean verboseLogging = false;
 
     @DataBoundConstructor
     public ArtifactoryGenericArtifactConfig() {}
@@ -141,6 +142,15 @@ public class ArtifactoryGenericArtifactConfig extends AbstractDescribableImpl<Ar
     @DataBoundSetter
     public void setDisableDirectDownload(boolean disableDirectDownload) {
         this.disableDirectDownload = disableDirectDownload;
+    }
+
+    public boolean isVerboseLogging() {
+        return verboseLogging;
+    }
+
+    @DataBoundSetter
+    public void setVerboseLogging(boolean verboseLogging) {
+        this.verboseLogging = verboseLogging;
     }
 
     public static ArtifactoryGenericArtifactConfig get() {
