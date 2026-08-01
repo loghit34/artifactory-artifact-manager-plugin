@@ -198,11 +198,13 @@ public class ArtifactoryArtifactManagerTest extends BaseTest {
         int wireMockPort = wmRuntimeInfo.getHttpPort();
         runWithRealJenkins(realJenkinsExtension, jenkinsRule -> {
             ArtifactoryGenericArtifactConfig config = configureConfig(jenkinsRule, wireMockPort, "jenkins/");
+            config.setVerboseLogging(true);
             jenkinsRule.configRoundtrip();
             assertThat(config.getStorageCredentialId(), is("the-credentials-id"));
             assertThat(config.getServerUrl(), is("http://localhost:" + wireMockPort));
             assertThat(config.getRepository(), is("my-generic-repo"));
             assertThat(config.getPrefix(), is("jenkins/"));
+            assertThat(config.isVerboseLogging(), is(true));
         });
     }
 }
