@@ -209,8 +209,7 @@ public class ArtifactoryArtifactManager extends ArtifactManager implements Stash
                 this.config.getRepository(),
                 Utils.getCredentials(),
                 this.config.getMaxUploadRetries(),
-                this.config.getRetryDelaySeconds(),
-                this.config.isVerboseLogging());
+                this.config.getRetryDelaySeconds());
     }
 
     private static class UploadFile implements Serializable {
@@ -358,10 +357,6 @@ public class ArtifactoryArtifactManager extends ArtifactManager implements Stash
             File sourceFile = new File(folder, uploadFile.getName());
             String filePath = sourceFile.toPath().toString();
             String targetUrl = uploadFile.getUrl();
-
-            if (config.isVerboseLogging()) {
-                LOGGER.info("Uploading: {}", filePath);
-            }
 
             try {
                 executeWithRetry(
